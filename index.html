@@ -111,6 +111,32 @@
   .nav-toggle { display:none; background:none; border:1px solid var(--line-2); color:var(--text);
     border-radius:9px; padding:8px 11px; font-size:15px; cursor:pointer; }
 
+  /* Auth (Google login) */
+  .auth { display:flex; align-items:center; }
+  .btn-login {
+    display:inline-flex; align-items:center; gap:9px; cursor:pointer;
+    font-family:var(--ff); font-size:14px; font-weight:600; color:#1f2937;
+    background:#ffffff; border:1px solid rgba(255,255,255,0.85);
+    padding:8px 15px; border-radius:10px; transition:.18s; white-space:nowrap;
+  }
+  .btn-login:hover { background:#f1f5f9; transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,0.3); }
+  .btn-login svg { display:block; }
+  .user-chip {
+    display:flex; align-items:center; gap:10px;
+    background:rgba(255,255,255,0.04); border:1px solid var(--line-2);
+    border-radius:100px; padding:5px 6px 5px 10px;
+  }
+  .user-chip .avatar { width:28px; height:28px; border-radius:50%; object-fit:cover;
+    background:var(--panel-2); border:1px solid var(--line-2); }
+  .user-chip .user-name { font-size:13.5px; font-weight:600; color:var(--text);
+    max-width:130px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .btn-logout {
+    font-family:var(--ff); font-size:12.5px; font-weight:600; cursor:pointer;
+    color:var(--muted); background:rgba(255,255,255,0.04);
+    border:1px solid var(--line-2); border-radius:100px; padding:5px 12px; transition:.18s;
+  }
+  .btn-logout:hover { color:var(--danger); border-color:var(--danger); }
+
   /* ---------- Hero ---------- */
   .hero { position:relative; padding:96px 0 72px; }
   .badge {
@@ -297,6 +323,10 @@
   @media (max-width:860px) {
     .nav-links { display:none; }
     .nav-toggle { display:inline-block; }
+    .auth { margin-left:auto; margin-right:6px; }
+    .btn-login span { display:none; }
+    .btn-login { padding:8px 10px; }
+    .user-chip .user-name { max-width:90px; }
     .nav-links.open {
       display:flex; flex-direction:column; position:absolute; top:62px; right:16px; left:16px;
       background:var(--panel); border:1px solid var(--line-2); border-radius:14px; padding:10px;
@@ -332,6 +362,17 @@
       <a href="#cases">주요실적</a>
       <a class="nav-cta" href="#contact">연락하기</a>
     </nav>
+    <div class="auth" id="authArea">
+      <button class="btn-login" id="btnLogin" type="button">
+        <svg width="17" height="17" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.3 4.1 29.4 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22 22-9.8 22-22c0-1.3-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.3 4.1 29.4 2 24 2 15.9 2 8.8 6.6 6.3 14.7z"/><path fill="#4CAF50" d="M24 46c5.3 0 10.1-2 13.7-5.3l-6.3-5.3c-2 1.5-4.6 2.5-7.4 2.5-5.2 0-9.6-3.3-11.2-8l-6.5 5C8.7 41.3 15.8 46 24 46z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4 5.4l6.3 5.3c-.4.4 6.4-4.7 6.4-14.7 0-1.3-.1-2.3-.4-3.5z"/></svg>
+        <span>구글로 로그인</span>
+      </button>
+      <div class="user-chip" id="userChip" hidden>
+        <img class="avatar" id="userAvatar" alt="" referrerpolicy="no-referrer" />
+        <span class="user-name" id="userName"></span>
+        <button class="btn-logout" id="btnLogout" type="button" title="로그아웃">로그아웃</button>
+      </div>
+    </div>
     <button class="nav-toggle" aria-label="메뉴" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
   </div>
 </header>
@@ -591,6 +632,82 @@
     <p style="margin-top:6px;opacity:.7">본 사이트의 사건·실적은 비밀유지를 위해 익명·요약 처리되었습니다.</p>
   </div>
 </footer>
+
+<!-- Supabase JS SDK (UMD) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  /* ==========================================================================
+     Supabase Google 로그인 설정
+     --------------------------------------------------------------------------
+     아래 두 값을 본인 Supabase 프로젝트 값으로 교체하세요.
+     (Supabase 대시보드 → Project Settings → Data API / API Keys)
+       - SUPABASE_URL       : Project URL  (예: https://abcxyz.supabase.co)
+       - SUPABASE_ANON_KEY  : anon public key (공개용 키라 노출돼도 안전)
+     ========================================================================== */
+  const SUPABASE_URL      = "https://YOUR-PROJECT-REF.supabase.co";
+  const SUPABASE_ANON_KEY = "YOUR-ANON-PUBLIC-KEY";
+
+  (function initAuth() {
+    const btnLogin  = document.getElementById("btnLogin");
+    const btnLogout = document.getElementById("btnLogout");
+    const userChip  = document.getElementById("userChip");
+    const userName  = document.getElementById("userName");
+    const userAvatar= document.getElementById("userAvatar");
+
+    const configured =
+      SUPABASE_URL.startsWith("https://") &&
+      !SUPABASE_URL.includes("YOUR-PROJECT-REF") &&
+      !SUPABASE_ANON_KEY.includes("YOUR-ANON");
+
+    // SDK 로드 실패 또는 미설정 시: 버튼은 두되 안내
+    if (!window.supabase || !configured) {
+      btnLogin.addEventListener("click", () => {
+        alert(
+          !window.supabase
+            ? "Supabase SDK를 불러오지 못했습니다. 인터넷 연결/차단 여부를 확인하세요."
+            : "아직 Supabase 설정이 완료되지 않았습니다.\n\nindex.html 상단의 SUPABASE_URL / SUPABASE_ANON_KEY 값을\n본인 프로젝트 값으로 교체한 뒤 다시 배포하세요."
+        );
+      });
+      return;
+    }
+
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    function render(user) {
+      if (user) {
+        const meta = user.user_metadata || {};
+        userName.textContent = meta.full_name || meta.name || user.email || "사용자";
+        if (meta.avatar_url) { userAvatar.src = meta.avatar_url; userAvatar.style.display = ""; }
+        else { userAvatar.style.display = "none"; }
+        userAvatar.alt = userName.textContent;
+        btnLogin.hidden = true;
+        userChip.hidden = false;
+      } else {
+        btnLogin.hidden = false;
+        userChip.hidden = true;
+      }
+    }
+
+    // 로그인: 구글 OAuth (현재 페이지로 리디렉트 복귀)
+    btnLogin.addEventListener("click", async () => {
+      const { error } = await sb.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: window.location.origin + window.location.pathname }
+      });
+      if (error) alert("로그인 오류: " + error.message);
+    });
+
+    // 로그아웃
+    btnLogout.addEventListener("click", async () => {
+      await sb.auth.signOut();
+      render(null);
+    });
+
+    // 초기 세션 확인 + 상태 변화 구독
+    sb.auth.getSession().then(({ data }) => render(data.session ? data.session.user : null));
+    sb.auth.onAuthStateChange((_event, session) => render(session ? session.user : null));
+  })();
+</script>
 
 <script>
   // Reveal on scroll
