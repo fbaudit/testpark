@@ -1,0 +1,605 @@
+<!--
+  ============================================================================
+  박재현 · 디지털 포렌식 전문가 — 개인 프로필 사이트
+  ----------------------------------------------------------------------------
+  ▷ 실제 정보로 바꾸는 방법:
+     아래 본문에서 [ ] 로 감싼 부분(또는 '예시' 표시된 문구)을 본인 정보로
+     교체하세요. 대부분 검색(Ctrl+F)으로 '[' 를 찾으면 됩니다.
+     - 이름/직함: <h1>, hero-role
+     - 통계 숫자: .stat-num
+     - 경력/자격/실적: 각 섹션의 카드 텍스트
+     - 연락처: #contact 섹션의 이메일/링크
+  ▷ 완전 자립형 파일입니다. 더블클릭만으로 브라우저에서 열립니다.
+  ============================================================================
+-->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>박재현 · 디지털 포렌식 전문가</title>
+<meta name="description" content="디지털 포렌식 전문가 박재현 — 침해사고 분석, 모바일·디스크·메모리 포렌식, 문서 위변조 감정, 내부감사 지원." />
+
+<style>
+  :root {
+    --bg:        #0a0e14;
+    --bg-2:      #0f1520;
+    --panel:     #121a27;
+    --panel-2:   #16202f;
+    --line:      rgba(255,255,255,0.08);
+    --line-2:    rgba(255,255,255,0.14);
+    --text:      #e6edf5;
+    --muted:     #90a0b4;
+    --muted-2:   #5f6f83;
+    --accent:    #38bdf8;
+    --accent-2:  #22d3a8;
+    --accent-dim: rgba(56,189,248,0.14);
+    --danger:    #f97066;
+    --radius:    16px;
+    --maxw:      1120px;
+    --ff: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic",
+          "Apple SD Gothic Neo", "Noto Sans KR", Roboto, sans-serif;
+    --mono: "SFMono-Regular", "JetBrains Mono", "Consolas", ui-monospace, monospace;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:var(--ff);
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+
+  /* Ambient background */
+  body::before {
+    content:"";
+    position:fixed; inset:0; z-index:-2;
+    background:
+      radial-gradient(900px 500px at 78% -6%, rgba(56,189,248,0.10), transparent 60%),
+      radial-gradient(720px 480px at 8% 8%, rgba(34,211,168,0.07), transparent 55%),
+      linear-gradient(180deg, #0a0e14 0%, #080b10 100%);
+  }
+  body::after {
+    content:"";
+    position:fixed; inset:0; z-index:-1; opacity:.5;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+    background-size:52px 52px;
+    -webkit-mask-image:radial-gradient(ellipse 90% 60% at 50% 0%, #000 40%, transparent 100%);
+            mask-image:radial-gradient(ellipse 90% 60% at 50% 0%, #000 40%, transparent 100%);
+  }
+
+  .wrap { max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+
+  a { color:inherit; text-decoration:none; }
+
+  /* ---------- Nav ---------- */
+  header.nav {
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    background:rgba(10,14,20,0.72);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner {
+    max-width:var(--maxw); margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+  }
+  .brand { display:flex; align-items:center; gap:11px; font-weight:700; letter-spacing:-.01em; }
+  .brand .mark {
+    width:34px; height:34px; border-radius:9px; flex:0 0 auto;
+    display:grid; place-items:center;
+    background:linear-gradient(135deg, var(--accent), var(--accent-2));
+    color:#04121a; font-weight:800; font-size:15px;
+    box-shadow:0 4px 18px rgba(56,189,248,0.35);
+  }
+  .brand small { display:block; font-weight:500; color:var(--muted); font-size:11.5px; letter-spacing:.02em; }
+  .nav-links { display:flex; gap:6px; align-items:center; }
+  .nav-links a {
+    color:var(--muted); font-size:14px; font-weight:500;
+    padding:8px 13px; border-radius:9px; transition:.18s;
+  }
+  .nav-links a:hover { color:var(--text); background:rgba(255,255,255,0.05); }
+  .nav-cta {
+    color:var(--text) !important;
+    border:1px solid var(--line-2);
+    background:rgba(255,255,255,0.03);
+  }
+  .nav-cta:hover { border-color:var(--accent); color:var(--accent) !important; background:var(--accent-dim) !important; }
+  .nav-toggle { display:none; background:none; border:1px solid var(--line-2); color:var(--text);
+    border-radius:9px; padding:8px 11px; font-size:15px; cursor:pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero { position:relative; padding:96px 0 72px; }
+  .badge {
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12.5px; font-weight:600; letter-spacing:.03em;
+    color:var(--accent); background:var(--accent-dim);
+    border:1px solid rgba(56,189,248,0.25);
+    padding:6px 13px; border-radius:100px; margin-bottom:26px;
+  }
+  .badge .dot { width:7px; height:7px; border-radius:50%; background:var(--accent-2);
+    box-shadow:0 0 0 0 rgba(34,211,168,.6); animation:pulse 2.4s infinite; }
+  @keyframes pulse {
+    0% { box-shadow:0 0 0 0 rgba(34,211,168,.5); }
+    70% { box-shadow:0 0 0 8px rgba(34,211,168,0); }
+    100% { box-shadow:0 0 0 0 rgba(34,211,168,0); }
+  }
+  .hero h1 {
+    font-size:clamp(40px, 6.4vw, 68px);
+    line-height:1.04; letter-spacing:-.035em; font-weight:800;
+    margin-bottom:10px;
+  }
+  .hero h1 .accent {
+    background:linear-gradient(120deg, var(--accent) 10%, var(--accent-2) 90%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .hero-role {
+    font-size:clamp(17px,2.4vw,21px); color:var(--muted); font-weight:600;
+    letter-spacing:-.01em; margin-bottom:22px;
+  }
+  .hero-lead {
+    max-width:620px; color:var(--muted); font-size:16.5px; line-height:1.7;
+    margin-bottom:34px;
+  }
+  .hero-lead strong { color:var(--text); font-weight:600; }
+  .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:56px; }
+  .btn {
+    display:inline-flex; align-items:center; gap:9px;
+    padding:12px 22px; border-radius:11px; font-weight:600; font-size:15px;
+    transition:.2s; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-primary {
+    background:linear-gradient(135deg, var(--accent), var(--accent-2));
+    color:#04121a;
+    box-shadow:0 6px 22px rgba(56,189,248,0.28);
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(56,189,248,0.4); }
+  .btn-ghost { border-color:var(--line-2); color:var(--text); background:rgba(255,255,255,0.02); }
+  .btn-ghost:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-dim); }
+
+  .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
+  .stat { background:var(--panel); padding:22px 20px; }
+  .stat-num { font-size:30px; font-weight:800; letter-spacing:-.03em;
+    background:linear-gradient(120deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  .stat-label { font-size:13px; color:var(--muted); margin-top:3px; font-weight:500; }
+
+  /* ---------- Section shell ---------- */
+  section.block { padding:78px 0; border-top:1px solid var(--line); }
+  .eyebrow {
+    display:inline-block; font-family:var(--mono); font-size:12.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--accent); margin-bottom:14px; font-weight:600;
+  }
+  .sec-title { font-size:clamp(27px,3.6vw,38px); font-weight:800; letter-spacing:-.03em; line-height:1.15; }
+  .sec-desc { color:var(--muted); max-width:640px; margin-top:14px; font-size:16px; }
+  .sec-head { margin-bottom:44px; }
+
+  /* ---------- About ---------- */
+  .about-grid { display:grid; grid-template-columns:1.35fr .9fr; gap:44px; align-items:start; }
+  .about-grid p { color:var(--muted); margin-bottom:18px; font-size:16.5px; line-height:1.78; }
+  .about-grid p strong { color:var(--text); font-weight:600; }
+  .about-card {
+    background:linear-gradient(180deg,var(--panel),var(--bg-2));
+    border:1px solid var(--line); border-radius:var(--radius); padding:26px;
+  }
+  .about-card h4 { font-size:14px; color:var(--muted-2); text-transform:uppercase;
+    letter-spacing:.08em; margin-bottom:16px; font-weight:600; }
+  .info-row { display:flex; justify-content:space-between; gap:14px; padding:11px 0;
+    border-bottom:1px dashed var(--line); font-size:14.5px; }
+  .info-row:last-child { border-bottom:none; }
+  .info-row span:first-child { color:var(--muted); }
+  .info-row span:last-child { color:var(--text); font-weight:600; text-align:right; }
+
+  /* ---------- Expertise ---------- */
+  .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .card {
+    background:var(--panel); border:1px solid var(--line);
+    border-radius:var(--radius); padding:26px 24px; transition:.24s; position:relative; overflow:hidden;
+  }
+  .card::before {
+    content:""; position:absolute; inset:0 0 auto 0; height:2px;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    transform:scaleX(0); transform-origin:left; transition:.3s;
+  }
+  .card:hover { transform:translateY(-4px); border-color:var(--line-2); background:var(--panel-2); }
+  .card:hover::before { transform:scaleX(1); }
+  .card .ico {
+    width:46px; height:46px; border-radius:12px; display:grid; place-items:center;
+    background:var(--accent-dim); border:1px solid rgba(56,189,248,0.22);
+    font-size:22px; margin-bottom:18px;
+  }
+  .card h3 { font-size:17.5px; font-weight:700; letter-spacing:-.01em; margin-bottom:9px; }
+  .card p { color:var(--muted); font-size:14.5px; line-height:1.65; }
+
+  /* ---------- Timeline ---------- */
+  .timeline { position:relative; padding-left:30px; }
+  .timeline::before { content:""; position:absolute; left:7px; top:6px; bottom:6px; width:2px;
+    background:linear-gradient(180deg,var(--accent),var(--accent-2),transparent); }
+  .tl-item { position:relative; padding:0 0 34px 8px; }
+  .tl-item:last-child { padding-bottom:0; }
+  .tl-item::before {
+    content:""; position:absolute; left:-30px; top:5px; width:16px; height:16px; border-radius:50%;
+    background:var(--bg); border:3px solid var(--accent);
+    box-shadow:0 0 0 4px rgba(56,189,248,0.12);
+  }
+  .tl-date { font-family:var(--mono); font-size:12.5px; color:var(--accent); font-weight:600; letter-spacing:.02em; }
+  .tl-item h3 { font-size:18px; font-weight:700; margin:5px 0 3px; letter-spacing:-.01em; }
+  .tl-org { color:var(--muted); font-size:14.5px; font-weight:500; margin-bottom:8px; }
+  .tl-item ul { list-style:none; }
+  .tl-item li { color:var(--muted); font-size:14.5px; padding:2px 0 2px 18px; position:relative; }
+  .tl-item li::before { content:"▹"; position:absolute; left:0; color:var(--accent-2); font-size:12px; top:3px; }
+
+  /* ---------- Certs ---------- */
+  .cert-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:34px; }
+  .cert-list { display:flex; flex-direction:column; gap:12px; }
+  .cert {
+    display:flex; align-items:center; gap:14px;
+    background:var(--panel); border:1px solid var(--line);
+    border-radius:12px; padding:15px 18px; transition:.2s;
+  }
+  .cert:hover { border-color:var(--accent); background:var(--panel-2); }
+  .cert .cbadge {
+    width:40px; height:40px; flex:0 0 auto; border-radius:10px; display:grid; place-items:center;
+    font-family:var(--mono); font-weight:700; font-size:12px; color:var(--accent-2);
+    background:rgba(34,211,168,0.10); border:1px solid rgba(34,211,168,0.25);
+  }
+  .cert-name { font-weight:600; font-size:15px; }
+  .cert-sub { color:var(--muted); font-size:12.5px; }
+  .subhead { font-size:15px; font-weight:700; color:var(--muted-2); text-transform:uppercase;
+    letter-spacing:.08em; margin-bottom:16px; }
+
+  /* ---------- Cases ---------- */
+  .case-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  .case {
+    background:linear-gradient(180deg,var(--panel),var(--bg-2));
+    border:1px solid var(--line); border-radius:var(--radius); padding:26px; transition:.24s;
+  }
+  .case:hover { transform:translateY(-3px); border-color:var(--line-2); }
+  .case-tag { display:inline-block; font-family:var(--mono); font-size:11.5px; letter-spacing:.05em;
+    color:var(--accent-2); background:rgba(34,211,168,0.08); border:1px solid rgba(34,211,168,0.2);
+    padding:4px 10px; border-radius:100px; margin-bottom:14px; }
+  .case h3 { font-size:18px; font-weight:700; margin-bottom:9px; letter-spacing:-.01em; }
+  .case p { color:var(--muted); font-size:14.5px; line-height:1.68; }
+  .case .result { margin-top:14px; padding-top:14px; border-top:1px dashed var(--line);
+    font-size:13.5px; color:var(--accent); font-weight:600; }
+
+  /* ---------- Contact ---------- */
+  .contact-wrap {
+    background:
+      radial-gradient(600px 300px at 80% 0%, rgba(56,189,248,0.10), transparent 60%),
+      linear-gradient(180deg,var(--panel),var(--bg-2));
+    border:1px solid var(--line-2); border-radius:24px; padding:52px 44px; text-align:center;
+  }
+  .contact-wrap h2 { font-size:clamp(26px,3.4vw,36px); font-weight:800; letter-spacing:-.03em; margin-bottom:14px; }
+  .contact-wrap p { color:var(--muted); max-width:520px; margin:0 auto 30px; font-size:16px; }
+  .contact-methods { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+  .cm {
+    display:inline-flex; align-items:center; gap:9px; padding:12px 20px;
+    border:1px solid var(--line-2); border-radius:12px; font-size:14.5px; font-weight:600;
+    color:var(--text); background:rgba(255,255,255,0.02); transition:.2s;
+  }
+  .cm:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-dim); transform:translateY(-2px); }
+
+  /* ---------- Footer ---------- */
+  footer { border-top:1px solid var(--line); padding:34px 0; text-align:center; }
+  footer p { color:var(--muted-2); font-size:13.5px; }
+  footer .brand { justify-content:center; margin-bottom:12px; }
+
+  /* Reveal on scroll */
+  .reveal { opacity:0; transform:translateY(22px); transition:.7s cubic-bezier(.16,.84,.44,1); }
+  .reveal.in { opacity:1; transform:none; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:860px) {
+    .nav-links { display:none; }
+    .nav-toggle { display:inline-block; }
+    .nav-links.open {
+      display:flex; flex-direction:column; position:absolute; top:62px; right:16px; left:16px;
+      background:var(--panel); border:1px solid var(--line-2); border-radius:14px; padding:10px;
+    }
+    .nav-links.open a { padding:12px; }
+    .about-grid { grid-template-columns:1fr; gap:28px; }
+    .cards { grid-template-columns:1fr; }
+    .cert-grid, .case-grid { grid-template-columns:1fr; }
+    .stats { grid-template-columns:repeat(2,1fr); }
+  }
+  @media (max-width:440px){
+    .stats { grid-template-columns:1fr 1fr; }
+    .hero { padding-top:64px; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    *{scroll-behavior:auto}
+  }
+</style>
+
+<!-- ============================ NAV ============================ -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <span class="mark">박</span>
+      <span>박재현<small>Digital Forensics Expert</small></span>
+    </a>
+    <nav class="nav-links" id="menu">
+      <a href="#about">소개</a>
+      <a href="#expertise">전문분야</a>
+      <a href="#experience">경력</a>
+      <a href="#credentials">자격·학력</a>
+      <a href="#cases">주요실적</a>
+      <a class="nav-cta" href="#contact">연락하기</a>
+    </nav>
+    <button class="nav-toggle" aria-label="메뉴" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<main id="top">
+<!-- ============================ HERO ============================ -->
+<section class="hero">
+  <div class="wrap">
+    <span class="badge"><span class="dot"></span>디지털 포렌식 · 침해사고 대응 · 디지털 증거 감정</span>
+    <h1>박재현<br><span class="accent">디지털 증거를 사실로</span> 만듭니다.</h1>
+    <!-- [직함] 실제 직함/소속으로 교체하세요 -->
+    <p class="hero-role">디지털 포렌식 전문가 · 침해사고 분석가</p>
+    <p class="hero-lead">
+      복잡한 디지털 흔적 속에서 <strong>법적 증거능력을 갖춘 사실</strong>을 찾아냅니다.
+      기업 내부감사와 사고 대응, 소송·감정 지원까지 —
+      <strong>재현 가능하고 방어 가능한 분석</strong>으로 결론을 뒷받침합니다.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#contact">분석 의뢰·상담 →</a>
+      <a class="btn btn-ghost" href="#cases">주요 실적 보기</a>
+    </div>
+
+    <!-- [숫자] 실제 수치로 교체하세요 -->
+    <div class="stats reveal">
+      <div class="stat"><div class="stat-num">12<span style="font-size:18px">년+</span></div><div class="stat-label">포렌식 실무 경력</div></div>
+      <div class="stat"><div class="stat-num">300<span style="font-size:18px">건+</span></div><div class="stat-label">분석·감정 사건</div></div>
+      <div class="stat"><div class="stat-num">40<span style="font-size:18px">건+</span></div><div class="stat-label">침해사고 대응</div></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">보유 전문 자격</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ABOUT ============================ -->
+<section class="block" id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">About</span>
+      <h2 class="sec-title">증거의 무결성부터<br>결론의 방어까지</h2>
+    </div>
+    <div class="about-grid reveal">
+      <div>
+        <p>
+          안녕하세요, 디지털 포렌식 전문가 <strong>박재현</strong>입니다.
+          디스크·모바일·메모리·클라우드에 남은 디지털 흔적을 표준 절차에 따라 수집·보존·분석하여,
+          <strong>법정과 감사에서 방어 가능한 결론</strong>으로 정리하는 일을 합니다.
+        </p>
+        <p>
+          핵심은 <strong>무결성(chain of custody)</strong>과 <strong>재현성</strong>입니다.
+          쓰기방지 이미징으로 원본을 보존하고, 해시로 동일성을 검증하며, 사용한 도구와 절차를
+          투명하게 기록해 누구든 같은 결과에 도달할 수 있게 합니다.
+        </p>
+        <p>
+          기업 내부감사팀, 법무팀, 수사·감정 기관과 협업하며 —
+          내부 정보유출, 회계부정 흔적, 이메일·문서 위변조, 침해사고 원인 규명 등
+          <strong>사실관계가 첨예한 사안</strong>에서 객관적 근거를 제공해 왔습니다.
+        </p>
+      </div>
+      <aside class="about-card">
+        <h4>Profile</h4>
+        <!-- [프로필] 실제 정보로 교체하세요 -->
+        <div class="info-row"><span>이름</span><span>박재현</span></div>
+        <div class="info-row"><span>전문</span><span>Digital Forensics</span></div>
+        <div class="info-row"><span>분야</span><span>침해사고 · 감정 · 내부감사</span></div>
+        <div class="info-row"><span>경력</span><span>12년+</span></div>
+        <div class="info-row"><span>기반</span><span>대한민국 · 서울</span></div>
+        <div class="info-row"><span>언어</span><span>한국어 · 영어</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ EXPERTISE ============================ -->
+<section class="block" id="expertise">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Expertise</span>
+      <h2 class="sec-title">전문 분야</h2>
+      <p class="sec-desc">증거 유형과 사고 시나리오에 맞춰, 수집 단계부터 감정서 작성까지 전 과정을 수행합니다.</p>
+    </div>
+    <div class="cards reveal">
+      <div class="card">
+        <div class="ico">🖥️</div>
+        <h3>디스크 포렌식</h3>
+        <p>HDD/SSD 쓰기방지 이미징, 삭제·은닉 파일 복구, 파일시스템 타임라인 분석으로 행위 흔적을 복원합니다.</p>
+      </div>
+      <div class="card">
+        <div class="ico">📱</div>
+        <h3>모바일 포렌식</h3>
+        <p>스마트폰·태블릿의 메시지·통화·위치·앱 데이터 추출과 분석. 논리·파일시스템·물리 수집을 상황에 맞게 적용합니다.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🧠</div>
+        <h3>메모리 포렌식</h3>
+        <p>휘발성 메모리(RAM) 덤프에서 실행 프로세스·네트워크 연결·악성코드 흔적을 추출해 실시간 상태를 재구성합니다.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🛡️</div>
+        <h3>침해사고 분석</h3>
+        <p>랜섬웨어·계정 탈취·내부자 위협 등 사고의 침투 경로와 피해 범위를 규명하고 재발 방지 대책을 제시합니다.</p>
+      </div>
+      <div class="card">
+        <div class="ico">📄</div>
+        <h3>문서·이메일 감정</h3>
+        <p>메타데이터·로그 기반으로 문서와 이메일의 위·변조 여부, 작성·수정 이력을 검증하고 감정서로 정리합니다.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🔎</div>
+        <h3>내부감사 · e-Discovery</h3>
+        <p>내부 정보유출·부정 조사를 위한 증거 식별·보전, 대용량 데이터 검토(키워드·개인정보 필터링)를 지원합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ EXPERIENCE ============================ -->
+<section class="block" id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Experience</span>
+      <h2 class="sec-title">경력</h2>
+      <p class="sec-desc">아래는 구성을 보여주는 예시입니다. 실제 소속·기간·역할로 교체하세요.</p>
+    </div>
+    <div class="timeline reveal">
+      <!-- [경력] 실제 경력으로 교체하세요 -->
+      <div class="tl-item">
+        <div class="tl-date">2021 — 현재</div>
+        <h3>디지털 포렌식 랩 · 책임 분석가</h3>
+        <div class="tl-org">기업 침해사고 대응 및 디지털 증거 감정 총괄</div>
+        <ul>
+          <li>기업 내부 정보유출·부정 사건 포렌식 조사 및 감정서 작성</li>
+          <li>침해사고 대응(IR) 팀 리드 — 침투 경로 규명 및 복구 지원</li>
+          <li>증거 수집·보존 절차(SOP) 수립 및 내부 교육</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2017 — 2021</div>
+        <h3>정보보안팀 · 포렌식 수사관</h3>
+        <div class="tl-org">디스크·모바일 포렌식 및 소송 지원</div>
+        <ul>
+          <li>민·형사 소송 대응을 위한 디지털 증거 분석 및 법정 증언 지원</li>
+          <li>모바일 기기 데이터 추출·분석 다수 수행</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2013 — 2017</div>
+        <h3>보안 관제 · 사고분석 담당</h3>
+        <div class="tl-org">SOC 운영 및 악성코드 분석 입문</div>
+        <ul>
+          <li>보안 이벤트 모니터링 및 초동 사고분석</li>
+          <li>악성코드 정적·동적 분석 역량 확보</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CREDENTIALS ============================ -->
+<section class="block" id="credentials">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Credentials</span>
+      <h2 class="sec-title">자격 · 학력</h2>
+      <p class="sec-desc">대표적인 포렌식·보안 자격 예시입니다. 실제 보유 항목만 남기고 교체하세요.</p>
+    </div>
+    <div class="cert-grid reveal">
+      <div>
+        <div class="subhead">보유 자격</div>
+        <div class="cert-list">
+          <!-- [자격증] 실제 보유 자격으로 교체하세요 -->
+          <div class="cert"><span class="cbadge">DFE</span><div><div class="cert-name">디지털포렌식전문가 2급</div><div class="cert-sub">한국포렌식학회 / 관련 기관</div></div></div>
+          <div class="cert"><span class="cbadge">EnCE</span><div><div class="cert-name">EnCase Certified Examiner</div><div class="cert-sub">OpenText (Guidance Software)</div></div></div>
+          <div class="cert"><span class="cbadge">ACE</span><div><div class="cert-name">AccessData Certified Examiner</div><div class="cert-sub">Exterro / AccessData (FTK)</div></div></div>
+          <div class="cert"><span class="cbadge">정보</span><div><div class="cert-name">정보보안기사</div><div class="cert-sub">한국산업인력공단</div></div></div>
+          <div class="cert"><span class="cbadge">CHFI</span><div><div class="cert-name">Computer Hacking Forensic Investigator</div><div class="cert-sub">EC-Council</div></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="subhead">학력 · 교육</div>
+        <div class="cert-list">
+          <!-- [학력] 실제 학력으로 교체하세요 -->
+          <div class="cert"><span class="cbadge">M.S.</span><div><div class="cert-name">정보보호(디지털 포렌식) 석사</div><div class="cert-sub">○○대학교 대학원 · 예시</div></div></div>
+          <div class="cert"><span class="cbadge">B.S.</span><div><div class="cert-name">컴퓨터공학 학사</div><div class="cert-sub">○○대학교 · 예시</div></div></div>
+        </div>
+        <div class="subhead" style="margin-top:26px">전문 도구</div>
+        <div class="cert-list">
+          <div class="cert"><span class="cbadge">🧰</span><div><div class="cert-name">EnCase · FTK · Magnet AXIOM</div><div class="cert-sub">디스크·통합 분석</div></div></div>
+          <div class="cert"><span class="cbadge">📲</span><div><div class="cert-name">Cellebrite UFED · Oxygen</div><div class="cert-sub">모바일 추출·분석</div></div></div>
+          <div class="cert"><span class="cbadge">⚙️</span><div><div class="cert-name">Volatility · Autopsy · Wireshark</div><div class="cert-sub">메모리·오픈소스·네트워크</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CASES ============================ -->
+<section class="block" id="cases">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Selected Work</span>
+      <h2 class="sec-title">주요 실적</h2>
+      <p class="sec-desc">공개 가능한 범위의 예시입니다. 비밀유지 의무를 고려해 사건은 익명·요약 형태로 소개합니다.</p>
+    </div>
+    <div class="case-grid reveal">
+      <!-- [실적] 실제 실적으로 교체하세요 -->
+      <div class="case">
+        <span class="case-tag">내부 정보유출</span>
+        <h3>퇴직자 영업비밀 반출 규명</h3>
+        <p>퇴직 임박 직원의 USB·클라우드 업로드·이메일 전송 흔적을 타임라인으로 재구성하여 반출 정황을 입증.</p>
+        <div class="result">→ 감정서 제출 및 법적 대응 근거 확보</div>
+      </div>
+      <div class="case">
+        <span class="case-tag">침해사고 대응</span>
+        <h3>랜섬웨어 침투 경로 분석</h3>
+        <p>초기 침투 지점부터 횡적 이동, 데이터 암호화 시점까지의 공격 체인을 복원하고 재발 방지 대책 수립.</p>
+        <div class="result">→ 피해 범위 확정 및 보안 강화 권고</div>
+      </div>
+      <div class="case">
+        <span class="case-tag">문서 감정</span>
+        <h3>계약 문서 위·변조 감정</h3>
+        <p>문서 메타데이터와 수정 이력을 분석하여 작성·변경 시점의 불일치를 확인, 위변조 여부에 대한 객관적 의견 제시.</p>
+        <div class="result">→ 소송 증거로 채택 지원</div>
+      </div>
+      <div class="case">
+        <span class="case-tag">모바일 포렌식</span>
+        <h3>스마트폰 데이터 복구·분석</h3>
+        <p>삭제된 메시지·통화·위치 데이터를 복원하여 사건 발생 전후의 행위와 관계를 입증하는 자료로 정리.</p>
+        <div class="result">→ 사실관계 확정에 결정적 기여</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CONTACT ============================ -->
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="contact-wrap reveal">
+      <span class="eyebrow">Contact</span>
+      <h2>분석 의뢰·자문이 필요하신가요?</h2>
+      <p>침해사고 대응, 디지털 증거 감정, 내부감사 지원까지 —
+         사안을 알려주시면 접근 방향과 진행 절차를 안내해 드립니다.</p>
+      <!-- [연락처] 실제 연락처로 교체하세요 (공개 가능한 것만) -->
+      <div class="contact-methods">
+        <a class="cm" href="mailto:park1470@gmail.com">✉️ park1470@gmail.com</a>
+        <a class="cm" href="#" onclick="return false">💼 LinkedIn</a>
+        <a class="cm" href="#" onclick="return false">📞 연락처</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="mark">박</span><span>박재현</span></a>
+    <p>© 2026 박재현 · Digital Forensics Expert. All rights reserved.</p>
+    <p style="margin-top:6px;opacity:.7">본 사이트의 사건·실적은 비밀유지를 위해 익명·요약 처리되었습니다.</p>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Close mobile menu on link click
+  document.querySelectorAll('#menu a').forEach(a =>
+    a.addEventListener('click', () => document.getElementById('menu').classList.remove('open')));
+</script>
